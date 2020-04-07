@@ -47,37 +47,76 @@ int main() {
         std::cin.clear();
         std::cin >> x >> y;
         std::cin >> operation;
+        operation = std::tolower(operation);
 
-        if (operation == 'x' || operation == 'X') {
-            if (field.touch(x, y)) {
-                message = "...";
-            } else {
-                message = "🚫 Failed to touch that position.";
-            }
-        } else if (operation == 'c' || operation == 'C') {
-            if (field.setEmptyFlag(x, y)) {
-                message = "⚪ Cleared flag in the given position.";
-            } else {
-                message = "🚫 Failed to clear flag in the given position.";
-            }
-        } else if (operation == '?') {
-            if (field.addQuestionFlag(x, y)) {
-                message = Game::QUESTION_BOMB_FLAG_STR + " Placed a question mark.";
-            } else {
-                message = "🚫 Failed to place question mark.";
-            }
-        } else if (operation == '!') {
-            if (field.addBombFlag(x, y)) {
-                message = Game::BOMB_FLAG_STR + " One bomb flag used.";
-            } else {
-                message = "🚫 Failed to use bomb flag.";
-            }
-        } else if (operation == 'q') {
-            field.revealAll();
-            message = "🃏 Secret quit (q) option called. Field revealed. Use Ctrl+C to cancel.";
-        } else {
-            message = "🚫 Unknowm operation.";
+        switch (operation) {
+            case 'x':
+                if (field.touch(x, y)) {
+                    message = "...";
+                } else {
+                    message = "🚫 Failed to touch that position.";
+                }
+                break;
+            case 'c':
+                if (field.setEmptyFlag(x, y)) {
+                    message = "⚪ Cleared flag in the given position.";
+                } else {
+                    message = "🚫 Failed to clear flag in the given position.";
+                }
+                break;
+            case '?':
+                if (field.addQuestionFlag(x, y)) {
+                    message = Game::QUESTION_BOMB_FLAG_STR + " Placed a question mark.";
+                } else {
+                    message = "🚫 Failed to place question mark.";
+                }                
+                break;
+            case '!':
+                if (field.addBombFlag(x, y)) {
+                    message = Game::BOMB_FLAG_STR + " One bomb flag used.";
+                } else {
+                    message = "🚫 Failed to use bomb flag.";
+                }
+                break;
+            case 'q':
+                field.revealAll();
+                message = "🃏 Secret quit (q) option called. Field revealed. Use Ctrl+C to cancel.";
+                break;
+            default:
+                message = "🚫 Unknowm operation.";
+                break;
         }
+
+        // if (operation == 'x' || operation == 'X') {
+        //     if (field.touch(x, y)) {
+        //         message = "...";
+        //     } else {
+        //         message = "🚫 Failed to touch that position.";
+        //     }
+        // } else if (operation == 'c' || operation == 'C') {
+        //     if (field.setEmptyFlag(x, y)) {
+        //         message = "⚪ Cleared flag in the given position.";
+        //     } else {
+        //         message = "🚫 Failed to clear flag in the given position.";
+        //     }
+        // } else if (operation == '?') {
+        //     if (field.addQuestionFlag(x, y)) {
+        //         message = Game::QUESTION_BOMB_FLAG_STR + " Placed a question mark.";
+        //     } else {
+        //         message = "🚫 Failed to place question mark.";
+        //     }
+        // } else if (operation == '!') {
+        //     if (field.addBombFlag(x, y)) {
+        //         message = Game::BOMB_FLAG_STR + " One bomb flag used.";
+        //     } else {
+        //         message = "🚫 Failed to use bomb flag.";
+        //     }
+        // } else if (operation == 'q') {
+        //     field.revealAll();
+        //     message = "🃏 Secret quit (q) option called. Field revealed. Use Ctrl+C to cancel.";
+        // } else {
+        //     message = "🚫 Unknowm operation.";
+        // }
     }
 
     return 0;
